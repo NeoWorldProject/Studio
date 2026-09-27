@@ -1,42 +1,58 @@
 (() => {
-  const video = document.querySelector('#scene-video');
-  const source = video.querySelector('source');
-  const error = document.querySelector('.scene-video-error');
-  let inView = false;
-  let loaded = false;
-  let resumeOnVisibility = false;
-  video.muted = true;
-  const showError = () => { error.hidden = false; };
-  video.addEventListener('error', showError);
-  source.addEventListener('error', showError);
-  function loadVideo() {
-    if (loaded) return;
-    loaded = true;
-    video.poster = video.dataset.poster;
-    source.src = source.dataset.src;
-    video.load();
+  const states = new Map();
+  const videos = document.querySelectorAll('.scene-video');
+  if (!videos.length) return;
+
+  function loadVideo(state) {
+    if (state.loaded) return;
+    state.loaded = true;
+    state.video.poster = state.video.dataset.poster;
+    state.source.src = state.source.dataset.src;
+    state.video.load();
   }
-  function playVisibleVideo() {
-    if (!inView || document.hidden) return;
-    loadVideo();
+
+  function playVisibleVideo(state) {
+    if (!state.inView || document.hidden) return;
+    loadVideo(state);
     // Native controls remain available if the browser declines autoplay.
-    video.play().then(() => {
-      if (!inView || document.hidden) video.pause();
+    state.video.play().then(() => {
+      if (!state.inView || document.hidden) state.video.pause();
     }).catch(() => {});
   }
-  new IntersectionObserver(entries => {
-    const entry = entries[0];
-    inView = entry.isIntersecting && entry.intersectionRatio >= .08;
-    if (inView) playVisibleVideo();
-    else { resumeOnVisibility = false; video.pause(); }
-  }, { threshold: .08 }).observe(video);
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const state = states.get(entry.target);
+      state.inView = entry.isIntersecting && entry.intersectionRatio >= .08;
+      if (state.inView) playVisibleVideo(state);
+      else {
+        state.resumeOnVisibility = false;
+        state.video.pause();
+      }
+    });
+  }, { threshold: .08 });
+
+  videos.forEach(video => {
+    const source = video.querySelector('source');
+    const error = video.closest('.scene-video-card').querySelector('.scene-video-error');
+    const state = { video, source, inView: false, loaded: false, resumeOnVisibility: false };
+    const showError = () => { error.hidden = false; };
+    video.muted = true;
+    video.addEventListener('error', showError);
+    source.addEventListener('error', showError);
+    states.set(video, state);
+    observer.observe(video);
+  });
+
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      resumeOnVisibility = !video.paused;
-      video.pause();
-    } else if (resumeOnVisibility) {
-      resumeOnVisibility = false;
-      playVisibleVideo();
-    }
+    states.forEach(state => {
+      if (document.hidden) {
+        state.resumeOnVisibility = !state.video.paused;
+        state.video.pause();
+      } else if (state.resumeOnVisibility) {
+        state.resumeOnVisibility = false;
+        playVisibleVideo(state);
+      }
+    });
   });
 })();

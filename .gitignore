@@ -12,6 +12,7 @@
 !/preview/viewer.css
 !/preview/app.js
 !/preview/scene-hero.js
+!/preview/scene-explorer.js
 !/preview/articulation.js
 !/preview/scene-video.js
 !/preview/lazy-media.js
@@ -41,6 +42,8 @@
 !/assets/reference_image_3_5ids/reference_image_3/*.png
 !/assets/architecture/
 !/assets/architecture/*.gif
+!/assets/architecture/scene-method/
+!/assets/architecture/scene-method/*.webp
 !/assets/studio/
 /assets/studio/*
 !/assets/studio/scenes/
@@ -51,11 +54,18 @@
 /assets/studio/scenes/scene-01/*
 !/assets/studio/scenes/scene-01/scene.glb
 !/assets/studio/scenes/scene-01/scene-wireframe.bin
+!/assets/studio/scenes/scene-01/scene-record.json
+!/assets/studio/scenes/scene-01/scene-explorer-data.js
 /assets/studio/videos/*
 !/assets/studio/videos/scene-01.mp4
+!/assets/studio/videos/scene-comparison.mp4
+!/assets/studio/videos/sim2real.mp4
 /assets/studio/posters/*
 !/assets/studio/posters/scene-01.jpg
+!/assets/studio/posters/scene-comparison.jpg
+!/assets/studio/posters/sim2real.jpg
 /scripts/*
 !/scripts/build-pages.py
+!/scripts/generate-scene-explorer-data.py
 !/scripts/generate-architecture-gifs.py
 !/scripts/preview-server.py

@@ -6,13 +6,16 @@ import json
 import shutil
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "site"
-PAGE_FILES = ["index.html", "style.css", "viewer.css", "app.js", "scene-hero.js", "articulation.js", "lazy-media.js", "scene-video.js"]
-VENDOR_FILES = ["three.min.js", "three.LICENSE", "anime.umd.min.js", "anime.LICENSE.md", "OBJLoader.js", "OrbitControls.js"]
+PAGE_FILES = ["index.html", "style.css", "viewer.css", "app.js", "scene-hero.js", "scene-explorer.js", "articulation.js", "lazy-media.js", "scene-video.js"]
+VENDOR_FILES = ["three.min.js", "three.LICENSE", "anime.umd.min.js", "anime.LICENSE.md", "OBJLoader.js", "OrbitControls.js", "GLTFLoader.js", "DRACOLoader.js"]
 ASSET_FILES = [
     "fusion-pixel-latin-subset.woff2",
     "studio/scenes/scene-01/scene-wireframe.bin",
-    "studio/videos/scene-01.mp4",
-    "studio/posters/scene-01.jpg",
+    "studio/scenes/scene-01/scene-explorer-data.js",
+    "studio/videos/scene-comparison.mp4",
+    "studio/videos/sim2real.mp4",
+    "studio/posters/scene-comparison.jpg",
+    "studio/posters/sim2real.jpg",
     "architecture/target-mask-camera-v2.png",
     "architecture/target-depth-v3-transparent.png",
     "architecture/audit.gif",
@@ -21,6 +24,17 @@ ASSET_FILES = [
     "architecture/admit.gif",
     "architecture/retained.gif",
     "architecture/physics.gif",
+    "architecture/scene-method/observation-wide.webp",
+    "architecture/scene-method/observation-detail.webp",
+    "architecture/scene-method/handoff-real.webp",
+    "architecture/scene-method/handoff-sim.webp",
+    "architecture/scene-method/object-real.webp",
+    "architecture/scene-method/object-sim.webp",
+    "architecture/scene-method/feedback-real.webp",
+    "architecture/scene-method/feedback-sim.webp",
+    "architecture/scene-method/scene-real.webp",
+    "architecture/scene-method/scene-sim.webp",
+    "architecture/scene-method/robot-scene.webp",
     "architecture/icons/camera.png",
     "architecture/icons/gear.png",
     "architecture/icons/robot.png",
@@ -64,7 +78,7 @@ def build():
     for name in ASSET_FILES:
         copy(ROOT / "assets" / name, OUTPUT / "assets" / name)
     index = OUTPUT / "index.html"
-    index.write_text(index.read_text(encoding="utf-8").replace('name="asset-mode" content="source"', 'name="asset-mode" content="bundle"'), encoding="utf-8")
+    index.write_text(index.read_text(encoding="utf-8").replace('name="asset-mode" content="source"', 'name="asset-mode" content="bundle"').replace('../assets/', './assets/'), encoding="utf-8")
     source = ROOT / "assets/batch5_collision_urdf_textured"
     for path in source.rglob("*"):
         if path.is_file():
