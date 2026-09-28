@@ -11,7 +11,7 @@
   <link rel="icon" type="image/svg+xml" href="brand/neoworld-favicon.svg?v=black-7">
   <title>NeoWorld-3 — Building Interactive Worlds for Embodied Intelligence</title>
   <script>document.documentElement.classList.add('js');const theme=new URLSearchParams(location.search).get('theme');if(theme==='light'||theme==='ocean')document.documentElement.classList.add(`theme-${theme}`);if(theme==='ocean')document.querySelector('meta[name="theme-color"]').content='#0b1420'</script>
-  <link rel="stylesheet" href="style.css?v=benchmarks-36">
+  <link rel="stylesheet" href="style.css?v=benchmarks-37">
   <script defer src="vendor/three.min.js"></script>
   <script defer src="vendor/OrbitControls.js"></script>
   <script defer src="vendor/GLTFLoader.js"></script>
@@ -350,36 +350,16 @@
   </section>
         <section class="article-section benchmark-section" id="benchmarks" aria-labelledby="benchmarks-heading">
           <div class="section-heading"><span class="section-number">08</span><div><p class="eyebrow">QUANTITATIVE EVALUATION</p><h2 id="benchmarks-heading">NeoWorld-3 leads across object and scene reconstruction</h2></div></div>
-          <p class="section-intro">A leaderboard view of the primary object-level metrics and the aggregate multi-object scene quality score. Longer bars indicate stronger results within each metric.</p>
+          <p class="section-intro">A leaderboard view centered on visual fidelity, geometric agreement, and multi-object scene quality. DINOv3 is reported for both object and scene reconstruction.</p>
 
           <figure class="benchmark-card benchmark-object" aria-labelledby="object-benchmark-title">
             <figcaption class="benchmark-card-head">
               <span><small>BENCHMARK 01 / OBJECT LEVEL</small><strong id="object-benchmark-title">3DCodeBench</strong></span>
-              <span class="benchmark-card-note">4 metrics · higher is better</span>
+              <span class="benchmark-card-note">3 higher ↑ · 1 lower ↓</span>
             </figcaption>
             <div class="benchmark-metric-grid">
-              <section class="metric-board" aria-labelledby="metric-exec">
-                <header><span><b id="metric-exec">Exec</b><small>Program execution rate</small></span><em>%</em></header>
-                <ol class="score-list">
-                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">100.00</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
-                  <li style="--score:100%;--delay:1"><span class="score-rank">01</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">100.00</span><i class="score-track"><i class="score-fill"></i></i></li>
-                  <li style="--score:99.52%;--delay:2"><span class="score-rank">03</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">99.52</span><i class="score-track"><i class="score-fill"></i></i></li>
-                  <li style="--score:97.64%;--delay:3"><span class="score-rank">04</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">97.64</span><i class="score-track"><i class="score-fill"></i></i></li>
-                </ol>
-              </section>
-
-              <section class="metric-board" aria-labelledby="metric-siglip">
-                <header><span><b id="metric-siglip">SigLIP-2</b><small>Visual similarity</small></span><em>score</em></header>
-                <ol class="score-list">
-                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.8605</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
-                  <li style="--score:99.60%;--delay:1"><span class="score-rank">02</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.8571</span><i class="score-track"><i class="score-fill"></i></i></li>
-                  <li style="--score:95.51%;--delay:2"><span class="score-rank">03</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.8219</span><i class="score-track"><i class="score-fill"></i></i></li>
-                  <li style="--score:94.13%;--delay:3"><span class="score-rank">04</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.8100</span><i class="score-track"><i class="score-fill"></i></i></li>
-                </ol>
-              </section>
-
               <section class="metric-board" aria-labelledby="metric-dino">
-                <header><span><b id="metric-dino">DINOv3</b><small>Visual representation</small></span><em>score</em></header>
+                <header><span><b id="metric-dino">DINOv3</b><small>Visual representation similarity</small></span><em>higher ↑</em></header>
                 <ol class="score-list">
                   <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.6606</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
                   <li style="--score:96.14%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.6351</span><i class="score-track"><i class="score-fill"></i></i></li>
@@ -389,7 +369,7 @@
               </section>
 
               <section class="metric-board" aria-labelledby="metric-iou">
-                <header><span><b id="metric-iou">Framed IoU</b><small>Aligned silhouette overlap</small></span><em>score</em></header>
+                <header><span><b id="metric-iou">Framed IoU</b><small>Aligned silhouette overlap</small></span><em>higher ↑</em></header>
                 <ol class="score-list">
                   <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.7550</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
                   <li style="--score:86.72%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.6547</span><i class="score-track"><i class="score-fill"></i></i></li>
@@ -397,21 +377,55 @@
                   <li style="--score:75.39%;--delay:3"><span class="score-rank">04</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.5692</span><i class="score-track"><i class="score-fill"></i></i></li>
                 </ol>
               </section>
+
+              <section class="metric-board metric-board-lower" aria-labelledby="metric-chamfer">
+                <header><span><b id="metric-chamfer">Chamfer Distance</b><small>Reference-geometry agreement</small></span><em>lower ↓</em></header>
+                <div class="metric-lower-axis" aria-hidden="true"><span>more distance</span><strong>lower is better →</strong></div>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.0365 ↓</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:53.68%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.0680</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:50.76%;--delay:2"><span class="score-rank">03</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.0719</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:48.86%;--delay:3"><span class="score-rank">04</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.0747</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+
+              <section class="metric-board" aria-labelledby="metric-uni3d">
+                <header><span><b id="metric-uni3d">Uni3D 3D–3D</b><small>Multimodal semantic alignment</small></span><em>higher ↑</em></header>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.6229</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:93.16%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.5803</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:90.83%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.5658</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:90.19%;--delay:3"><span class="score-rank">04</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.5618</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
             </div>
-            <p class="benchmark-footnote">Bar lengths are normalized to the best method in each metric; labels report the original values.</p>
+            <p class="benchmark-footnote"><span>Bars are normalized to the best method; labels report original values.</span><span>Chamfer is inverse-normalized and anchored to the lower-is-better edge.</span></p>
           </figure>
 
-          <figure class="benchmark-card benchmark-mllm" aria-labelledby="mllm-benchmark-title">
+          <figure class="benchmark-card benchmark-scene" aria-labelledby="scene-benchmark-title">
             <figcaption class="benchmark-card-head">
-              <span><small>BENCHMARK 02 / MULTI-OBJECT SCENE</small><strong id="mllm-benchmark-title">RoboCasa365 · MLLM Overall Score</strong></span>
-              <span class="benchmark-card-note">Mean of Complete, Layout &amp; Function</span>
+              <span><small>BENCHMARK 02 / MULTI-OBJECT SCENE</small><strong id="scene-benchmark-title">RoboCasa365</strong></span>
+              <span class="benchmark-card-note">Visual fidelity + semantic scene quality</span>
             </figcaption>
-            <ol class="mllm-list">
-              <li style="--score:100%;--delay:0"><span class="mllm-rank">01</span><span class="mllm-method"><strong>NeoWorld-3</strong><small>OURS</small></span><i class="mllm-track"><i class="score-fill score-fill-ours"></i></i><span class="mllm-value"><strong>5.458</strong><small>5.125 · 5.625 · 5.625</small></span></li>
-              <li style="--score:67.85%;--delay:1"><span class="mllm-rank">02</span><span class="mllm-method"><strong>VIGA</strong><small>2026</small></span><i class="mllm-track"><i class="score-fill"></i></i><span class="mllm-value"><strong>3.703</strong><small>3.888 · 3.444 · 3.778</small></span></li>
-              <li style="--score:54.95%;--delay:2"><span class="mllm-rank">03</span><span class="mllm-method"><strong>Codex+BlenderMCP</strong><small>2025</small></span><i class="mllm-track"><i class="score-fill"></i></i><span class="mllm-value"><strong>2.999</strong><small>3.166 · 2.666 · 3.166</small></span></li>
-            </ol>
-            <p class="benchmark-footnote"><span>MLLM Overall Score = (Complete + Layout + Function) / 3.</span><span>Component values shown beneath each result.</span></p>
+            <div class="benchmark-scene-grid">
+              <section class="metric-board scene-metric-primary" aria-labelledby="scene-dino">
+                <header><span><b id="scene-dino">DINOv3</b><small>Multi-view visual similarity</small></span><em>primary metric</em></header>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.8331</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:77.59%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.6464</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:61.67%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.5138</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+              <section class="metric-board scene-metric-mllm" aria-labelledby="scene-mllm">
+                <header><span><b id="scene-mllm">MLLM Overall Score</b><small>Complete · Layout · Function</small></span><em>higher ↑</em></header>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">5.458</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:67.85%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">3.703</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:54.95%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">2.999</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+            </div>
+            <p class="benchmark-footnote"><span>DINOv3 is the primary visual-fidelity metric for scene reconstruction.</span><span>MLLM Overall = mean of Complete, Layout, and Function.</span></p>
           </figure>
         </section>
         <section class="article-section" id="outlook" aria-labelledby="outlook-heading">
