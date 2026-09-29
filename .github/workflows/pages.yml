@@ -19,11 +19,11 @@ jobs:
         with:
           python-version: '3.13'
       - name: Package website
-        run: python scripts/build-pages.py
+        run: python preview-v2/tools/build.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: site
+          path: site-v2
   deploy:
     needs: build
     runs-on: ubuntu-latest

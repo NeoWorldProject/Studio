@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="asset-mode" content="source">
+  <meta name="theme-color" content="#0b0d0b">
+  <meta name="description" content="NeoWorld-3 is an agentic framework for reconstructing simulation-ready interactive worlds from visual observations.">
+  <meta property="og:title" content="NeoWorld-3: Building Interactive Worlds for Embodied Intelligence">
+  <meta property="og:description" content="Coding-agent based reconstruction for simulation-ready interactive worlds.">
+  <link rel="icon" type="image/svg+xml" href="brand/neoworld-favicon.svg?v=black-7">
+  <title>NeoWorld-3 — Building Interactive Worlds for Embodied Intelligence</title>
+  <script>document.documentElement.classList.add('js');const theme=new URLSearchParams(location.search).get('theme');if(theme==='light'||theme==='ocean')document.documentElement.classList.add(`theme-${theme}`);if(theme==='ocean')document.querySelector('meta[name="theme-color"]').content='#0b1420';addEventListener('load',()=>{if(!window.nwApp)document.documentElement.classList.remove('js')})</script>
+  <link rel="preload" href="optimized/scene-wireframe.nwf2.gz" as="fetch" crossorigin>
+  <link rel="preload" href="../assets/fusion-pixel-latin-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="viewer.css?v=v2-1">
+  <link rel="stylesheet" href="style.css?v=v2-3">
+  <script defer src="scene-hero.js?v=v2-1"></script>
+  <script defer src="lazy-media.js?v=v2-1"></script>
+  <script defer src="app.js?v=v2-1"></script>
+  <script defer src="scene-video.js?v=v2-2"></script>
+  <script defer src="scene-explorer.js?v=v2-1"></script>
+</head>
+<body>
+  <a class="skip-link" href="#research">Skip to article</a>
+  <header class="nav"><div class="nav-inner">
+    <a class="brand" href="#top" aria-label="NeoWorld home"><img class="brand-mark" src="brand/neoworld-nw-small.svg?v=final-green-6" alt=""><span>NeoWorld<span class="brand-dot">3</span></span></a>
+    <nav aria-label="Main navigation"><a href="#research">Research</a><a href="#scene-demo">Scenes</a><a href="#interactive">Objects</a><a class="studio-link" href="https://neoworldproject.github.io/Studio/?lang=en" target="_blank" rel="noopener">NeoWorld Studio <span>↗</span></a></nav>
+  </div><div class="read-progress" aria-hidden="true"><i></i></div></header>
+  <main id="top">
+    <section class="hero" aria-labelledby="blog-title">
+      <div id="world" aria-hidden="true"></div><div class="veil" aria-hidden="true"></div><div class="hero-glow" aria-hidden="true"></div>
+      <div class="cover">
+        <div class="eyebrow reveal" style="--i:0">NEOWORLD-3 / RESEARCH BLOG</div>
+        <h1 id="blog-title"><span class="title-line" style="--i:0"><span>Building interactive</span></span><span class="title-line" style="--i:1"><span>worlds for embodied</span></span><span class="title-line" style="--i:2"><span>intelligence<span class="period">.</span></span></span></h1>
+        <p class="cover-subtitle reveal" style="--i:1">Agentic reconstruction for simulation-ready worlds</p>
+        <p class="cover-summary reveal" style="--i:2">From visual observations to interactive environments where embodied agents can learn, act, and improve.</p>
+        <div class="project-links reveal" style="--i:3" aria-label="Project resources">
+          <a class="resource-card resource-card-github" href="https://github.com/NeoWorldProject/NeoWorldStudio" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository, release coming soon">
+            <svg class="resource-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.226 17.284c-2.965-.36-5.054-2.493-5.054-5.256 0-1.123.404-2.336 1.078-3.144-.292-.741-.247-2.314.09-2.965.898-.112 2.111.36 2.83 1.01.853-.269 1.752-.404 2.853-.404 1.1 0 1.999.135 2.807.382.696-.629 1.932-1.1 2.83-.988.315.606.36 2.179.067 2.942.72.854 1.101 2 1.101 3.167 0 2.763-2.089 4.852-5.098 5.234.763.494 1.28 1.572 1.28 2.807v2.336c0 .674.561 1.056 1.235.786 4.066-1.55 7.255-5.615 7.255-10.646C23.5 6.188 18.334 1 11.978 1 5.62 1 .5 6.188.5 12.545c0 4.986 3.167 9.12 7.435 10.669.606.225 1.19-.18 1.19-.786V20.63a2.9 2.9 0 0 1-1.078.224c-1.483 0-2.359-.808-2.987-2.313-.247-.607-.517-.966-1.034-1.033-.27-.023-.359-.135-.359-.27 0-.27.45-.471.898-.471.652 0 1.213.404 1.797 1.235.45.651.921.943 1.483.943.561 0 .92-.202 1.437-.719.382-.381.674-.718.944-.943"/></svg>
+            <span class="resource-copy"><strong>GitHub</strong><small>Coming soon</small></span><span class="resource-arrow" aria-hidden="true">↗</span>
+          </a>
+          <span class="resource-card resource-card-soon" aria-label="arXiv, coming soon">
+            <svg class="resource-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 2.5h7l4 4V21H7a2 2 0 0 1-2-2V4.5a2 2 0 0 1 2-2Z"/><path d="M14 2.5v4h4M9 11h6m-6 4h6"/></svg>
+            <span class="resource-copy"><strong>arXiv</strong><small>Coming soon</small></span>
+          </span>
+          <span class="resource-card resource-card-soon" aria-label="Hugging Face, coming soon">
+            <span class="resource-icon resource-icon-emoji" aria-hidden="true">🤗</span>
+            <span class="resource-copy"><strong>Hugging Face</strong><small>Coming soon</small></span>
+          </span>
+          <span class="resource-card resource-card-soon" aria-label="App Store, coming soon">
+            <svg class="resource-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18.5h2"/></svg>
+            <span class="resource-copy"><strong>App Store</strong><small>Coming soon</small></span>
+          </span>
+        </div>
+      </div>
+    </section>
+    <div class="article-grid">
+      <aside class="article-toc"><nav aria-label="Article contents"><p>ON THIS PAGE</p><a href="#research">01 <span>Vision</span></a><a href="#framework">02 <span>Framework</span></a><a href="#agentic-architecture">03 <span>Agentic construction</span></a><a href="#refinement">04 <span>Refinement</span></a><a href="#simulation-ready">05 <span>Physical validity</span></a><a href="#scene-demo">06 <span>Scenes</span></a><a href="#interactive">07 <span>Objects</span></a><a href="#benchmarks">08 <span>Benchmarks</span></a><a href="#outlook">09 <span>Outlook</span></a></nav></aside>
+      <article class="article-body" aria-label="NeoWorld-3 research blog">
+        <section class="article-section" id="research" aria-labelledby="research-heading">
+          <div class="section-heading" data-reveal><span class="section-number">01</span><div><p class="eyebrow">THE VISION</p><h2 id="research-heading">Interactive worlds for embodied intelligence</h2></div></div>
+          <p>In recent years, AI has advanced rapidly through a simple but powerful recipe: large-scale pretraining followed by reinforcement learning. Embodied intelligence, however, faces a much harder scaling problem. The physical world is continuous, dynamic, and expensive to interact with; robots must learn not only what they see, but also how objects move, respond to forces, and change through interaction. To bring embodied intelligence into the same scalable learning paradigm, we need environments where such experience can be generated at scale.</p>
+          <p>Science fiction has long imagined intelligence learning inside virtual worlds. In <em>The Matrix</em>, Neo acquires new abilities through interaction in a virtual environment. This idea may offer a promising direction for embodied intelligence.</p>
+          <blockquote class="article-quote" data-reveal>Embodied intelligence needs worlds it can interact with, not just worlds it can see.</blockquote>
+          <p>Real-to-sim-to-real provides a practical path toward this goal: reconstruct real environments in simulation, use them to generate large-scale data and interactive experience for pretraining and reinforcement learning, and transfer the resulting capabilities back to physical robots. However, building such environments remains difficult. Visual realism alone is not enough: reconstructed worlds must also support modification, interaction, articulation, and physical simulation. For embodied intelligence, reconstruction must therefore move beyond generating 3D assets toward building simulation-ready interactive worlds.</p>
+        </section>
+        <section class="article-section" id="framework" aria-labelledby="framework-heading">
+          <div class="section-heading" data-reveal><span class="section-number">02</span><div><p class="eyebrow">INTRODUCING NEOWORLD-3</p><h2 id="framework-heading">Introducing NeoWorld-3</h2></div></div>
+          <p>We introduce <strong>NeoWorld-3</strong>, an agentic framework for reconstructing simulation-ready interactive worlds from visual observations. While existing reconstruction systems have achieved impressive visual quality through direct prediction, reconstructing complex structures, interactions, and physical constraints remains challenging. The emergence of large vision-language models and coding agents creates a new opportunity to move beyond this paradigm.</p>
+          <p>NeoWorld-3 is designed around three core principles: <strong>simulation-ready reconstruction, coding-agent based world construction, and object-to-scene scaling</strong>. Simulation-ready reconstruction preserves the geometry, articulation, and physical validity required for downstream simulation. Coding-agent based reconstruction enables vision-language models to actively construct and refine worlds through tools. Object-to-scene reconstruction allows the same framework to scale from individual objects to complex environments.</p>
+        </section>
+        <section class="article-section" id="agentic-architecture" aria-labelledby="architecture-heading">
+          <div class="section-heading" data-reveal><span class="section-number">03</span><div><p class="eyebrow">AGENTIC WORLD CONSTRUCTION</p><h2 id="architecture-heading">Agentic World Construction with NeoMCP and NeoSDK</h2></div></div>
+          <p>Most 3D reconstruction methods generate a final representation directly from visual observations. NeoWorld-3 takes a different route: reconstruction is carried out by coding agents that write modeling programs, invoke tools, inspect intermediate results, and modify only the parts that need improvement. This is especially useful for scene reconstruction, where errors are often local—a wrong object geometry or pose should not require regenerating the entire scene.</p>
+          <figure class="architecture-figure" data-reveal aria-labelledby="architecture-figure-caption">
+            <div class="architecture-figure-head"><span>FIGURE 01</span><strong>NEOWORLD-3 RECONSTRUCTION WORKFLOW</strong><em class="architecture-pan-hint" aria-hidden="true">swipe to pan →</em></div>
+            <div class="architecture-canvas">
+              <div class="workflow-board" role="img" aria-label="NeoWorld-3 scene reconstruction workflow from real observations through scene and object agents, matched-view feedback, parent integration, and optional articulation">
+                <div class="scene-method-diagram">
+                  <section class="scene-method-card scene-method-observations">
+                    <h3><img class="scene-method-icon" src="optimized/icons/camera.webp" width="96" height="96" decoding="async" loading="lazy" alt=""> Real observations</h3>
+                    <div class="scene-method-photo-pair scene-method-photo-pair-observations">
+                      <img src="../assets/architecture/scene-method/observation-wide.webp" alt="Real kitchen observation with stools and a microwave" loading="lazy" decoding="async">
+                      <img src="../assets/architecture/scene-method/observation-detail.webp" alt="Real kitchen observation with a sink and coffee machine" loading="lazy" decoding="async">
+                    </div>
+                    <p>Multi-view RGB-D + cameras</p>
+                  </section>
+
+                  <section class="scene-method-card scene-method-handoff">
+                    <h3><img class="scene-method-icon" src="optimized/icons/target.webp" width="96" height="96" decoding="async" loading="lazy" alt=""> Object handoff</h3>
+                    <div class="scene-method-handoff-visual">
+                      <img src="../assets/architecture/scene-method/handoff-real.webp" alt="Real coffee machine crop" loading="lazy" decoding="async">
+                      <span aria-hidden="true">+</span>
+                      <img src="../assets/architecture/scene-method/handoff-sim.webp" alt="Reconstructed coffee machine crop" loading="lazy" decoding="async">
+                    </div>
+                    <p>Views · source · context</p>
+                    <small>Bound object evidence<br>Fixed cameras + neighbors</small>
+                  </section>
+
+                  <section class="scene-method-reconstruction">
+                    <h3 class="scene-method-title"><img class="scene-method-icon" src="optimized/icons/gear.webp" width="96" height="96" decoding="async" loading="lazy" alt=""> Real-to-sim reconstruction</h3>
+                    <div class="scene-method-top-row">
+                      <article class="scene-method-card scene-method-agent">
+                        <h4><img class="scene-method-icon" src="optimized/icons/robot.webp" width="96" height="96" decoding="async" loading="lazy" alt=""> Scene agent</h4>
+                        <p>Observe, measure, and author</p>
+                        <small>Revises the scene program</small>
+                      </article>
+
+                      <article class="scene-method-card scene-method-tools">
+                        <h4><img class="scene-method-icon" src="optimized/icons/wrench.webp" width="96" height="96" decoding="async" loading="lazy" alt=""> NeoMCP + NeoSDK</h4>
+                        <div class="scene-method-tools-body"><code>cube()<br>translate()<br>rotate()</code><p><strong>Read · edit · measure · refine</strong><br>Tensor-twin parameter search<br>Blender materialization + checks</p></div>
+                        <small>Harness: evidence, budgets, and admission</small>
+                      </article>
+
+                      <article class="scene-method-card scene-method-output">
+                        <h4><img class="scene-method-icon" src="optimized/icons/database.webp" width="96" height="96" decoding="async" loading="lazy" alt=""> Real-Sim scene</h4>
+                        <div class="scene-method-labeled-pair"><span>Real</span><span>Sim</span><img src="../assets/architecture/scene-method/scene-real.webp" alt="Real kitchen scene" loading="lazy" decoding="async"><img src="../assets/architecture/scene-method/scene-sim.webp" alt="Reconstructed kitchen scene" loading="lazy" decoding="async"></div>
+                        <small>Editable reconstructed scene</small>
+                      </article>
+                    </div>
+
+                    <div class="scene-method-specialists">
+                      <div class="scene-method-specialists-head"><h4>Optional object specialists</h4><span>Bounded object episodes</span></div>
+                      <div class="scene-method-specialist-grid">
+                        <article class="scene-method-card scene-method-program">
+                          <h5>Author/revise program</h5>
+                          <svg class="scene-method-program-tree" viewBox="0 0 120 64" aria-hidden="true"><path d="M60 9V28M24 50V39H96V50M60 28V50"/><rect x="51" y="3" width="18" height="18" rx="2"/><rect x="15" y="48" width="18" height="13" rx="2"/><rect x="51" y="48" width="18" height="13" rx="2"/><rect x="87" y="48" width="18" height="13" rx="2"/></svg>
+                          <small>Editable source + parts</small>
+                        </article>
+                        <article class="scene-method-card scene-method-refine">
+                          <h5>Refine object geometry</h5>
+                          <div class="scene-method-labeled-pair"><span>Real</span><span>Sim</span><img src="../assets/architecture/scene-method/object-real.webp" alt="Real coffee machine" loading="lazy" decoding="async"><img src="../assets/architecture/scene-method/object-sim.webp" alt="Reconstructed coffee machine" loading="lazy" decoding="async"></div>
+                          <small>Fit against bound observations</small>
+                        </article>
+                        <article class="scene-method-card scene-method-feedback">
+                          <h5>Real-Sim feedback</h5>
+                          <div class="scene-method-labeled-pair"><span>Real</span><span>Sim</span><img src="../assets/architecture/scene-method/feedback-real.webp" alt="Real stools at the matched camera" loading="lazy" decoding="async"><img src="../assets/architecture/scene-method/feedback-sim.webp" alt="Reconstructed stools at the matched camera" loading="lazy" decoding="async"></div>
+                          <small>Compare at matched cameras</small>
+                        </article>
+                        <article class="scene-method-card scene-method-integration">
+                          <h5>Parent integration</h5>
+                          <div class="scene-method-integration-icons"><img src="optimized/icons/checklist.webp" width="96" height="96" decoding="async" loading="lazy" alt=""><img src="optimized/icons/layers.webp" width="96" height="96" decoding="async" loading="lazy" alt=""></div>
+                          <small>Stage returned source<br>Check geometry and ownership<br>Retain or reject</small>
+                        </article>
+                      </div>
+                      <p>Each worker edits its assigned object.<br>Cameras and neighboring objects stay fixed.</p>
+                    </div>
+                  </section>
+
+                  <section class="scene-method-articulation">
+                    <div class="scene-method-articulation-copy">
+                      <h3><img class="scene-method-icon" src="optimized/icons/physics-arm.webp" width="96" height="96" decoding="async" loading="lazy" alt=""> Optional articulation</h3>
+                      <div class="scene-method-articulation-flow"><span>Declared bodies / joints</span><b aria-hidden="true">→</b><span>Geometric sweep</span><b aria-hidden="true">→</b><span>Visual URDF + playback</span></div>
+                      <p>Declared motion keeps unresolved axes and limits explicit.</p>
+                    </div>
+                    <img class="scene-method-robot-scene" src="../assets/architecture/scene-method/robot-scene.webp" alt="Robot placed in the reconstructed kitchen scene" loading="lazy" decoding="async">
+                    <div class="scene-method-robot-copy"><strong>Robot in reconstructed scene</strong><span>Static placement visualization</span></div>
+                  </section>
+
+                  <svg class="scene-method-links" viewBox="0 0 1180 780" aria-hidden="true">
+                    <defs><marker id="scene-method-arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z"/></marker></defs>
+                    <path d="M223 164H259"/>
+                    <path d="M449 163H461"/>
+                    <path d="M892 163H904"/>
+                    <path d="M350 247V253H231V280H120V305"/>
+                    <path d="M223 417H259"/>
+                    <path d="M464 403H474"/>
+                    <path d="M698 403H708"/>
+                    <path d="M932 403H942"/>
+                    <path d="M1039 291V252"/>
+                    <path class="scene-method-link-feedback" d="M820 466V493H366V466"/>
+                    <path class="scene-method-link-feedback" d="M1025 71V25H354V71"/>
+                    <path class="scene-method-link-feedback" d="M1090 252H1168V548H826V566"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <figcaption id="architecture-figure-caption"><span>Matched-view feedback keeps each object revision grounded in fixed cameras and scene context.</span><span>Real observations → scene program → object refinement → parent integration.</span></figcaption>
+          </figure>
+          <p>NeoWorld-3 organizes this process with a hierarchical reconstruction harness. A scene-level coordinator maintains the global scene and decomposes it into scoped object tasks. Each object is handled by a fresh worker with access to its relevant observations and editable state. NeoMCP exposes reconstruction operations to the agent, while NeoSDK provides the underlying geometry, rendering, and optimization primitives. Object reconstruction can therefore be developed and refined independently while remaining grounded in the shared scene.</p>
+          <p>Before an object update is merged back, the candidate is inspected against its visual evidence and scene context; unsuccessful changes can be revised or rejected. The updated scene then becomes the context for subsequent tasks. In practice, this lets NeoWorld-3 improve complex scenes incrementally, preserving successful reconstructions while concentrating computation and agent reasoning on the parts that remain incorrect.</p>
+        </section>
+        <section class="article-section" id="refinement" aria-labelledby="refinement-heading">
+          <div class="section-heading" data-reveal><span class="section-number">04</span><div><p class="eyebrow">DIFFERENTIABLE REFINEMENT</p><h2 id="refinement-heading">Reasoning Meets Gradients: Differentiable Refinement</h2></div></div>
+          <p>One challenge in reconstruction is that vision-language models are strong at understanding visual concepts and structural relationships, but precise geometric parameter prediction remains difficult. Even when a model understands what an object should look like, directly predicting highly accurate geometry from numerical parameters is challenging.</p>
+          <p>NeoWorld-3 addresses this limitation through Differentiable Refinement. The agent first constructs an initial reconstruction, then refines it through differentiable rendering. The rendered result is compared with the original observation, image similarity serves as the optimization objective, and parameters in the generated geometric representation are updated through gradient-based optimization.</p>
+          <p>This creates a natural division of labor between reasoning and optimization. The vision-language model provides semantic understanding, decomposition strategies, and reconstruction programs, while differentiable optimization provides the numerical precision needed for high-fidelity geometry. Rather than relying on prediction alone, NeoWorld-3 can continuously improve reconstruction through visual feedback.</p>
+        </section>
+        <section class="article-section" id="simulation-ready" aria-labelledby="simulation-heading">
+          <div class="section-heading" data-reveal><span class="section-number">05</span><div><p class="eyebrow">PHYSICAL VALIDITY</p><h2 id="simulation-heading">From Geometry to Interaction: Watertightness and Articulation</h2></div></div>
+          <p>A visually accurate reconstruction is not necessarily a structurally valid one. Generated geometry can contain open boundaries, self-intersections, or inconsistent connections between parts, while movable components may lack explicit articulation structure. These issues are easy to overlook visually, but they prevent reconstructed objects from becoming reliable interactive assets.</p>
+          <p>NeoWorld-3 addresses these problems through explicit geometry validation and repair. The system inspects boundaries directly on the native indexed geometry, applies targeted repairs to invalid regions while preserving existing surface attributes, and re-inspects the repaired mesh to verify watertightness rather than relying on implicit remeshing. In parallel, the agent reconstructs articulation by identifying object parts, establishing joint relationships, estimating motion axes and ranges, and correcting invalid configurations.</p>
+          <p>This produces assets that are not only visually reconstructed, but also geometrically valid and explicitly articulated. The watertight pipeline preserves the original reconstruction while repairing structural defects, and the articulation pipeline captures how individual parts are connected and allowed to move. Together, they turn a reconstructed shape into a structured, interactive 3D asset.</p>
+        </section>
+        <section class="scene-demo article-section" id="scene-demo" aria-labelledby="scene-demo-heading">
+          <div class="section-heading" data-reveal><span class="section-number">06</span><div><p class="eyebrow">SCENE RECONSTRUCTION</p><h2 id="scene-demo-heading">From observations to a reconstructed world</h2></div></div>
+          <p class="section-intro">This NeoWorld Studio example compares a stabilized real-world capture with its reconstruction preview.</p>
+          <figure class="scene-video-card" data-reveal><div class="scene-video-bar"><span>NEOWORLD STUDIO / REAL–SIM COMPARISON</span><a href="https://neoworldproject.github.io/Studio/?lang=en" target="_blank" rel="noopener">View Studio ↗</a></div><video id="scene-video" class="scene-video" controls muted loop playsinline preload="none" width="1600" height="1090" data-poster="optimized/posters/scene-comparison.webp" aria-label="Stabilized kitchen capture on the left and reconstruction preview on the right"><source data-src="optimized/videos/scene-comparison.mp4" type="video/mp4">Your browser does not support embedded video. <a href="optimized/videos/scene-comparison.mp4">Open the video</a>.</video><p class="scene-video-error" hidden role="status">Unable to load this video. <a href="optimized/videos/scene-comparison.mp4" target="_blank" rel="noopener">Open video file ↗</a></p><figcaption><span>Left: stabilized real capture</span><span>Right: reconstruction preview</span></figcaption></figure>
+          <div class="scene-inspector-intro"><p class="eyebrow">INTERACTIVE SCENE 01</p><h3>See the finished world, then look underneath.</h3><p>The scene opens with its original materials. Click any object to reveal the transparent scene structure and the recorded construction operations behind that object.</p></div>
+          <section class="scene-explorer" data-reveal id="scene-explorer" aria-label="Interactive Scene 01 model and construction code" aria-busy="true">
+            <header class="scene-explorer-bar"><span>SCENE 01 · <b id="scene-explorer-count">loading model</b></span><button id="scene-xray-toggle" type="button" aria-pressed="false"><i aria-hidden="true"></i><span>X-Ray + Code</span></button></header>
+            <div class="scene-explorer-body">
+              <div class="scene-explorer-stage" id="scene-explorer-stage">
+                <div class="scene-explorer-status" role="status">Preparing the interactive kitchen…</div>
+                <div class="scene-explorer-tip" hidden></div>
+                <p class="scene-explorer-hint">click an object for X-ray + code · drag to rotate · scroll to zoom</p>
+              </div>
+              <aside class="scene-explorer-code-panel" id="scene-explorer-code-panel" hidden aria-label="Construction record of the selected scene object">
+                <div class="scene-explorer-code-head"><h4 id="scene-explorer-code-title">Object construction record</h4><span>RECORDED FROM SCENE.GLB</span><button class="scene-explorer-code-close" id="scene-explorer-code-close" type="button" aria-label="Return to rendered view">×</button></div>
+                <pre id="scene-explorer-code" aria-live="polite"></pre>
+              </aside>
+            </div>
+          </section>
+          <div class="sim2real-intro"><p class="eyebrow">SIM2REAL TRANSFER</p><h3>From the simulation twin back to the real robot</h3><p>This example connects real-world scanning, policy execution in the simulation twin, and the corresponding action on the physical robot.</p></div>
+          <figure class="scene-video-card scene-video-card-sim2real"><div class="scene-video-bar"><span>NEOWORLD STUDIO / SIM2REAL</span><a href="https://neoworldproject.github.io/Studio/?lang=en" target="_blank" rel="noopener">View Studio ↗</a></div><video id="sim2real-video" class="scene-video" controls muted loop playsinline preload="none" width="1000" height="676" data-poster="optimized/posters/sim2real.webp" aria-label="Real-world scanning, simulation twin policy, and real-world robot action"><source data-src="../assets/studio/videos/sim2real.mp4" type='video/mp4; codecs="hvc1.1.6.L93.B0"'><source data-src="optimized/videos/sim2real.mp4" type="video/mp4">Your browser does not support embedded video. <a href="optimized/videos/sim2real.mp4">Open the video</a>.</video><p class="scene-video-error" hidden role="status">Unable to load this video. <a href="optimized/videos/sim2real.mp4" target="_blank" rel="noopener">Open video file ↗</a></p><figcaption><span>Simulation-twin policy</span><span>Real-world robot action</span></figcaption></figure>
+        </section>
+  <section class="articulation-section" id="interactive" aria-labelledby="interactive-heading">
+    <div class="section-heading" data-reveal><span class="section-number">07</span><div><p class="eyebrow">ARTICULATED ASSETS</p><h2 id="interactive-heading">Object articulation</h2></div></div>
+    <p class="section-intro">Compare each source image with its interactive reconstruction, then inspect part hierarchies and joint limits using the controls below.</p>
+    <div class="object-picker" aria-label="Choose a demo object">
+      <button data-object="10449" aria-pressed="true"><span>01</span> Scissors <small>1 JOINT</small></button>
+      <button data-object="8994" aria-pressed="false"><span>02</span> Door <small>2 JOINTS</small></button>
+      <button data-object="101917" aria-pressed="false"><span>03</span> Oven <small>8 JOINTS</small></button>
+      <button data-object="101463" aria-pressed="false"><span>04</span> Spray bottle <small>4 JOINTS</small></button>
+      <button data-object="103967" aria-pressed="false"><span>05</span> Globe <small>1 JOINT</small></button>
+      <button data-object="100520" aria-pressed="false"><span>06</span> Folding chair <small>4 JOINTS</small></button>
+      <button data-object="100842" aria-pressed="false"><span>07</span> Suitcase <small>8 JOINTS</small></button>
+      <button data-object="101052" aria-pressed="false"><span>08</span> Utility knife <small>1 JOINT</small></button>
+      <button data-object="101220" aria-pressed="false"><span>09</span> Industrial fan <small>1 JOINT</small></button>
+      <button data-object="101284" aria-pressed="false"><span>10</span> Safety glasses <small>2 JOINTS</small></button>
+    </div>
+    <div class="object-workspace" data-reveal aria-busy="true">
+      <div class="object-comparison">
+        <figure class="object-reference">
+          <img id="object-reference-image" src="optimized/references/10449.webp" width="512" height="512" loading="lazy" decoding="async" alt="Scissors reference image">
+          <div class="object-reference-loading" id="object-reference-loading" role="status" hidden><span class="loading-orbit"></span><p>Loading scissors reference…</p></div>
+          <figcaption><span>REFERENCE / IMAGE 03</span><span id="object-reference-title">SCISSORS / 10449</span></figcaption>
+        </figure>
+        <div class="object-stage">
+        <div id="object-canvas" role="img" aria-label="Interactive 3D scissors: drag to orbit, scroll to zoom, and click to select a part"></div>
+        <div class="object-stage-label"><span class="live-dot"></span><span>RECONSTRUCTION</span><span id="object-title">SCISSORS / 10449</span></div>
+        <div class="object-view-tools"><button id="object-wire" aria-pressed="false">Wireframe</button><button id="object-axis" aria-pressed="false">Joint axes</button><button id="object-camera">Reset view ↗</button></div>
+        <div class="object-loading" id="object-loading" role="status"><span class="loading-orbit"></span><p>Loading object…</p><button id="object-retry" hidden>Retry</button></div>
+        <div class="object-stage-footer"><span>Drag to orbit · Scroll to zoom · Right-drag to pan · Click a part</span><span id="object-part">No part selected</span></div>
+        </div>
+      </div>
+      <aside class="joint-sidebar" aria-label="Object joint controls">
+        <div class="joint-heading"><span class="eyebrow">ARTICULATION</span><h3>Joint controls</h3><p id="object-summary">Move a slider to explore its range.</p></div>
+        <div class="joint-actions"><button id="object-play" aria-pressed="false" disabled>▷ Play motion</button><button id="object-reset" disabled>Reset joints ↺</button></div>
+        <div id="joint-controls"></div>
+        <div class="part-picker"><label for="object-links">Select a part</label><select id="object-links" disabled><option value="">All parts</option></select><p id="object-relationship">Select a part to inspect its connections.</p></div>
+        <div class="joint-note">This viewer demonstrates URDF kinematics with normalized dimensions; it does not run a physics simulation.</div>
+      </aside>
+    </div>
+    <p class="articulation-caption"><span>Revolute joints: degrees · Prismatic joints: normalized scene units</span><span>Interactive kinematic demonstration</span></p>
+  </section>
+        <section class="article-section benchmark-section" id="benchmarks" aria-labelledby="benchmarks-heading">
+          <div class="section-heading" data-reveal><span class="section-number">08</span><div><p class="eyebrow">QUANTITATIVE EVALUATION</p><h2 id="benchmarks-heading">NeoWorld-3 leads across object and scene reconstruction</h2></div></div>
+          <p class="section-intro">A leaderboard view centered on visual fidelity, geometric agreement, and multi-object scene quality. DINOv3 is reported for both object and scene reconstruction.</p>
+
+          <figure class="benchmark-card benchmark-object" aria-labelledby="object-benchmark-title">
+            <figcaption class="benchmark-card-head">
+              <span><small>BENCHMARK 01 / OBJECT LEVEL</small><strong id="object-benchmark-title">3DCodeBench</strong></span>
+              <span class="benchmark-card-note">3 higher ↑ · 1 lower ↓</span>
+            </figcaption>
+            <div class="benchmark-metric-grid">
+              <section class="metric-board" aria-labelledby="metric-dino">
+                <header><span><b id="metric-dino">DINOv3</b><small>Visual representation similarity</small></span><em>higher ↑</em></header>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.6606</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:96.14%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.6351</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:94.54%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.6245</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:86.16%;--delay:3"><span class="score-rank">04</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.5692</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+
+              <section class="metric-board" aria-labelledby="metric-iou">
+                <header><span><b id="metric-iou">Framed IoU</b><small>Aligned silhouette overlap</small></span><em>higher ↑</em></header>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.7550</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:86.72%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.6547</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:75.97%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.5736</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:75.39%;--delay:3"><span class="score-rank">04</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.5692</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+
+              <section class="metric-board metric-board-lower" aria-labelledby="metric-chamfer">
+                <header><span><b id="metric-chamfer">Chamfer Distance</b><small>Reference-geometry agreement</small></span><em>lower ↓</em></header>
+                <div class="metric-lower-axis" aria-hidden="true"><span>more distance</span><strong>lower is better →</strong></div>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.0365 ↓</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:53.68%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.0680</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:50.76%;--delay:2"><span class="score-rank">03</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.0719</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:48.86%;--delay:3"><span class="score-rank">04</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.0747</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+
+              <section class="metric-board" aria-labelledby="metric-uni3d">
+                <header><span><b id="metric-uni3d">Uni3D 3D–3D</b><small>Multimodal semantic alignment</small></span><em>higher ↑</em></header>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.6229</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:93.16%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.5803</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:90.83%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.5658</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:90.19%;--delay:3"><span class="score-rank">04</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.5618</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+            </div>
+            <p class="benchmark-footnote"><span>Bars are normalized to the best method; labels report original values.</span><span>Chamfer is inverse-normalized and anchored to the lower-is-better edge.</span></p>
+          </figure>
+
+          <figure class="benchmark-card benchmark-scene" aria-labelledby="scene-benchmark-title">
+            <figcaption class="benchmark-card-head">
+              <span><small>BENCHMARK 02 / MULTI-OBJECT SCENE</small><strong id="scene-benchmark-title">RoboCasa365</strong></span>
+              <span class="benchmark-card-note">Visual fidelity + semantic scene quality</span>
+            </figcaption>
+            <div class="benchmark-scene-grid">
+              <section class="metric-board scene-metric-primary" aria-labelledby="scene-dino">
+                <header><span><b id="scene-dino">DINOv3</b><small>Multi-view visual similarity</small></span><em>primary metric</em></header>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.8331</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:77.59%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.6464</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:61.67%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.5138</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+              <section class="metric-board scene-metric-mllm" aria-labelledby="scene-mllm">
+                <header><span><b id="scene-mllm">MLLM Overall Score</b><small>Complete · Layout · Function</small></span><em>higher ↑</em></header>
+                <ol class="score-list">
+                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">5.458</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:67.85%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">3.703</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:54.95%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">2.999</span><i class="score-track"><i class="score-fill"></i></i></li>
+                </ol>
+              </section>
+            </div>
+            <p class="benchmark-footnote"><span>DINOv3 is the primary visual-fidelity metric for scene reconstruction.</span><span>MLLM Overall = mean of Complete, Layout, and Function.</span></p>
+          </figure>
+        </section>
+        <section class="article-section" id="outlook" aria-labelledby="outlook-heading">
+          <div class="section-heading" data-reveal><span class="section-number">09</span><div><p class="eyebrow">LOOKING AHEAD</p><h2 id="outlook-heading">Looking Ahead</h2></div></div>
+          <p>Language models evolved from generating text to using tools and writing code. We believe 3D reconstruction is undergoing a similar transition. Coding-agent based reconstruction moves beyond directly predicting a final mesh: agents can reason about structure, construct representations, invoke tools, inspect intermediate results, and iteratively refine them.</p>
+          <p>NeoWorld-3 is a step toward this future. As foundation models improve, we aim to scale this approach from individual objects to complex real-world environments, turning visual observations into simulation-ready worlds for embodied learning and physical interaction. More broadly, we see reconstruction as a key layer in the embodied intelligence stack, connecting the physical world with scalable simulation. If this process can be made scalable, every real-world observation can become the starting point of a new training environment for intelligent agents.</p>
+          <p>Our long-term vision is to build the foundation for the next generation of embodied intelligence: A world where AI systems can not only perceive and understand, but also interact with and learn within it.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer"><a class="footer-brand" href="#top">NeoWorld-3</a><div><a href="https://neoworldproject.github.io/Studio/?lang=en" target="_blank" rel="noopener">NeoWorld Studio ↗</a><a href="https://github.com/NeoWorldProject/NeoWorldStudio" target="_blank" rel="noopener">Source ↗</a><a href="#top">Back to top ↑</a></div></footer>
+  <dialog class="method-lightbox" id="method-lightbox" aria-label="Enlarged workflow image">
+    <figure>
+      <button class="method-lightbox-close" type="button" aria-label="Close enlarged image">Close ×</button>
+      <img id="method-lightbox-image" src="" alt="">
+      <figcaption id="method-lightbox-caption"></figcaption>
+    </figure>
+  </dialog>
+  <noscript><p class="no-script">Enable JavaScript to use the interactive 3D object viewer.</p></noscript>
+</body>
+</html>

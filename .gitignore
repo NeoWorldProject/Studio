@@ -31,6 +31,7 @@
 /preview/brand/*
 !/preview/brand/neoworld-nw-small.svg
 !/preview/brand/neoworld-favicon.svg
+!/preview-v2/
 /assets/*
 !/assets/fusion-pixel-12px-proportional-latin.ttf.woff2
 !/assets/fusion-pixel-latin-subset.woff2
