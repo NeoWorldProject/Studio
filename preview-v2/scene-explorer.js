@@ -328,8 +328,9 @@
     });
     if (focus.isEmpty()) focus.setFromObject(root);
     const center = focus.getCenter(new T.Vector3());
+    center.y -= .22;
     const sphere = focus.getBoundingSphere(new T.Sphere());
-    const distance = sphere.radius / Math.sin(T.MathUtils.degToRad(camera.fov / 2)) * 0.5;
+    const distance = sphere.radius / Math.sin(T.MathUtils.degToRad(camera.fov / 2)) * 0.67;
     camera.position.copy(center).add(new T.Vector3(-.7, .45, 1).normalize().multiplyScalar(distance));
     camera.near = Math.max(sphere.radius / 100, .01);
     camera.far = sphere.radius * 40;

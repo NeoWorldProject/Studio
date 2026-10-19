@@ -48,6 +48,9 @@ em{color:var(--text)}
 .nav nav a.is-active{color:var(--text)}
 .nav nav span{margin-left:4px;color:var(--accent)}
 .studio-link{margin-left:8px;border:1px solid var(--line-strong)}
+.nav nav a.beta-nav-link{border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--accent)}
+.nav nav a.beta-nav-link:hover{background:var(--accent);color:var(--accent-ink)}
+.nav nav a.beta-nav-link:hover span{color:var(--accent-ink)}
 .read-progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;overflow:hidden;pointer-events:none}
 .read-progress i{display:block;height:100%;background:var(--accent);transform:scaleX(var(--progress,0));transform-origin:left center;will-change:transform}
 
@@ -69,6 +72,10 @@ h1{max-width:820px;margin:0 0 20px;font:600 clamp(40px,4.6vw,70px)/1.04 var(--di
 .period{color:var(--accent)}
 .cover-subtitle{margin:0 0 14px;font-size:clamp(18px,1.6vw,21px);line-height:1.45;color:var(--text)}
 .cover-summary{max-width:520px;margin:0 0 34px;font-size:16.5px;line-height:1.65}
+.beta-access-link{display:inline-flex;align-items:center;gap:12px;min-height:44px;margin-bottom:23px;padding:0 15px;border:1px solid var(--accent-line);border-radius:999px;background:var(--accent-soft);color:var(--accent);font:600 13px var(--display);transition:background .2s,color .2s,border-color .2s,transform .2s}
+.beta-access-link:hover{transform:translateY(-2px);border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+.beta-access-dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 10px var(--accent)}
+.beta-access-link>span:last-child{margin-left:6px;font-size:16px;font-weight:400}
 
 /* Cover resources: GitHub is the only live destination, so it leads; the rest recede. */
 .project-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:820px}
@@ -126,7 +133,7 @@ h3{margin:0 0 12px;font-size:17px;font-weight:600;letter-spacing:-.015em}
 .article-quote{position:relative;margin:36px 0;padding:26px 30px 26px 34px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(135deg,var(--accent-soft),transparent 60%),var(--surface);font:500 clamp(18px,1.55vw,21px)/1.55 var(--display);letter-spacing:-.012em;color:var(--text)}
 .article-quote:before{content:"";position:absolute;left:0;top:22px;bottom:22px;width:3px;border-radius:0 3px 3px 0;background:var(--accent)}
 
-/* Figure 01: fixed research-figure coordinates, scaled to the column (see app.js). */
+/* Figure 01: editable HTML/SVG diagram fitted by app.js. */
 .architecture-figure{margin:36px 0 38px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
 .architecture-figure-head{display:flex;align-items:center;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line);font:10.5px var(--mono);letter-spacing:.1em;color:var(--text-3)}
 .architecture-figure-head strong{font-weight:400;color:var(--text-2)}
@@ -322,6 +329,9 @@ h3{margin:0 0 12px;font-size:17px;font-weight:600;letter-spacing:-.015em}
 .benchmark-scene{margin-top:22px}
 .benchmark-scene .metric-board{padding-top:24px;padding-bottom:26px}
 .benchmark-scene .score-list li{padding:11px 0}
+.benchmark-scene .score-method{white-space:normal;overflow:visible;font-size:12.5px;line-height:1.45}
+.benchmark-scene .score-method small{display:inline-block}
+.benchmark-scene .benchmark-card-head>span:first-child{flex-wrap:wrap}
 .benchmark-scene .score-track{height:8px}
 .scene-metric-primary{position:relative;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 7%,var(--benchmark-panel)),var(--benchmark-panel) 58%);box-shadow:inset 0 2px var(--accent)}
 .scene-metric-primary>header em{border-color:var(--accent-line);background:var(--accent-soft);color:var(--accent)}
@@ -338,7 +348,7 @@ h3{margin:0 0 12px;font-size:17px;font-weight:600;letter-spacing:-.015em}
 .method-lightbox[open]{display:grid;place-items:center;animation:pop-in .3s var(--ease-out)}
 .method-lightbox::backdrop{background:#040504d9;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .method-lightbox figure{position:relative;margin:0;padding:44px 14px 13px;border:1px solid var(--line-strong);border-radius:14px;background:var(--surface);box-shadow:0 30px 90px #000c}
-.method-lightbox img{display:block;width:min(86vw,var(--lightbox-image-width,920px));max-height:78vh;object-fit:contain;border-radius:8px;background:#090b09}
+.method-lightbox img{display:block;width:min(94vw,var(--lightbox-image-width,920px));max-height:82vh;object-fit:contain;border-radius:8px;background:#090b09}
 .method-lightbox figcaption{max-width:min(86vw,920px);padding:11px 3px 0;font-size:13px;line-height:1.5;color:var(--text-2)}
 .method-lightbox-close{position:absolute;top:9px;right:11px;padding:6px 11px;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface-2);color:var(--text-2);font-size:12px}
 .method-lightbox-close:hover{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
@@ -385,6 +395,7 @@ h3{margin:0 0 12px;font-size:17px;font-weight:600;letter-spacing:-.015em}
 }
 @media(max-width:760px){.scene-explorer-bar{flex-direction:column;align-items:flex-start;padding:13px}.scene-explorer-bar button{align-self:stretch;justify-content:center}.scene-explorer-stage{height:420px}.scene-explorer-code-panel{width:calc(100% - 20px);max-height:235px}.scene-explorer-code-head h4{font-size:14px}.scene-explorer-code-panel pre{max-height:150px;font-size:10px}.scene-explorer-hint{left:10px;right:10px;bottom:10px;border-radius:8px;text-align:center;font-size:10px}.scene-code-line{padding-left:11px;padding-right:11px}}
 @media(max-width:600px){.method-lightbox figure{padding:40px 9px 10px}.method-lightbox img{width:min(90vw,var(--lightbox-image-width,920px));max-height:72vh}.method-lightbox figcaption{max-width:90vw}}
+@media(max-width:480px){.nav nav a[href="#research"],.nav nav .studio-link{display:none}}
 @media(max-width:360px){.project-links{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

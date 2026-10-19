@@ -1,5 +1,5 @@
 // Page shell: cover wireframe, scroll reveals, reading progress, section tracking, the
-// workflow-figure fit, and the image lightbox. The intro motion itself is CSS (style.css).
+// the image lightbox. The intro motion itself is CSS (style.css).
 (() => {
   const root = document.documentElement;
   const selectedTheme = root.classList.contains('theme-ocean') ? 'ocean' : root.classList.contains('theme-light') ? 'light' : 'lime';
@@ -33,7 +33,7 @@
   once(document.querySelectorAll('.metric-board'), 'is-visible', { threshold: .3 });
   window.nwApp = true;
 
-  const methodImages = [...document.querySelectorAll('.scene-method-photo-pair img, .scene-method-handoff-visual img, .scene-method-labeled-pair img, .scene-method-robot-scene')];
+  const methodImages = [...document.querySelectorAll('.method-v2-photo img')];
   const methodLightbox = document.querySelector('#method-lightbox');
   const methodLightboxImage = document.querySelector('#method-lightbox-image');
   const methodLightboxCaption = document.querySelector('#method-lightbox-caption');
@@ -114,8 +114,7 @@
   addEventListener('resize', scheduleTrack);
   track();
 
-  // Figure 01 keeps the method deck's fixed 1180 px coordinates and zooms to the column; below
-  // the minimum zoom it pans horizontally instead of shrinking the labels further.
+  // Fit the editable method diagram to the article width while keeping its labels legible.
   const figure = document.querySelector('.architecture-figure');
   const figureCanvas = figure?.querySelector('.architecture-canvas');
   const board = figure?.querySelector('.workflow-board');
@@ -126,11 +125,10 @@
       figure.classList.toggle('is-scrolled-end', figureCanvas.scrollLeft >= overflow - 4);
     };
     const fitBoard = () => {
-      const zoom = Math.min(Math.max(Math.floor(figureCanvas.clientWidth / 1180 * 1e4) / 1e4, .62), 1);
+      const zoom = Math.min(Math.max(Math.floor(figureCanvas.clientWidth / 1180 * 1e4) / 1e4, .82), 1);
       board.style.setProperty('--board-zoom', String(zoom));
       updateEdges();
     };
-    // The heading's width tracks the figure but not the board, so this cannot feed back into itself.
     const head = figure.querySelector('.architecture-figure-head');
     if (head && 'ResizeObserver' in window) new ResizeObserver(fitBoard).observe(head);
     else addEventListener('resize', fitBoard);

@@ -18,7 +18,7 @@ ROOT = V2.parent
 ASSETS = ROOT / 'assets'
 OUTPUT = ROOT / 'site-v2'
 
-PAGE_FILES = ['index.html', 'style.css', 'viewer.css', 'app.js', 'scene-hero.js', 'scene-explorer.js',
+PAGE_FILES = ['index.html', 'style.css', 'workflow.css', 'workflow.js', 'site-links.js', 'viewer.css', 'app.js', 'scene-hero.js', 'scene-explorer.js',
               'articulation.js', 'lazy-media.js', 'scene-video.js']
 VENDOR_FILES = ['three.min.js', 'three.LICENSE', 'OBJLoader.js', 'OrbitControls.js', 'GLTFLoader.js', 'DRACOLoader.js']
 BRAND_FILES = ['neoworld-nw-small.svg', 'neoworld-favicon.svg']
@@ -32,7 +32,8 @@ ASSET_FILES = [
     'studio/videos/sim2real.mp4',  # original HEVC, offered first to browsers that can play it
     *(f'architecture/scene-method/{name}.webp' for name in [
         'observation-wide', 'observation-detail', 'handoff-real', 'handoff-sim', 'object-real', 'object-sim',
-        'feedback-real', 'feedback-sim', 'scene-real', 'scene-sim', 'robot-scene']),
+        'feedback-real', 'feedback-sim', 'scene-real', 'scene-sim', 'robot-scene',
+        'articulation-closed', 'articulation-open', 'method-code', 'method-arm', 'method-bulb']),
 ]
 OBJECTS = ASSETS / 'batch5_collision_urdf_textured'
 

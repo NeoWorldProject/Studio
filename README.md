@@ -29,4 +29,4 @@ The homepage loads a prebaked line-only scene. The video and articulation viewer
 
 ## Attribution
 
-The research article is maintained in `Neoworld-3_blog.md` and presented in `preview/index.html`. The Scene 01 coffee-area GLB, comparison video, and poster originate from [NeoWorld Studio](https://neoworldproject.github.io/Studio/). The URDF viewer demonstrates kinematics, without a physics solver. Three.js and Anime.js licenses are retained under `preview/vendor/` and copied into the published bundle.
+The research article is maintained in `Neoworld-3_blog.md` and presented in `preview-v2/index.html`. The Scene 01 coffee-area model originates from [NeoWorld Studio](https://neoworldproject.github.io/Studio/) and includes the supplied floor repair. The comparison video pairs original capture frames with renders from the no-robot Blender scene at matched cameras, using three short excerpts from the capture. The URDF viewer demonstrates kinematics, without a physics solver. Three.js and Anime.js licenses are retained under `preview/vendor/` and copied into the published bundle.

@@ -44,7 +44,7 @@ REFERENCES = {
     **{i: f'batch5_collision_references_image3/{i}_image_3.png' for i in ['10449', '8994', '101917', '101463', '103967']},
     **{i: f'reference_image_3_5ids/reference_image_3/{i}.png' for i in ['100520', '100842', '101052', '101220', '101284']},
 }
-POSTERS = {'scene-comparison': 1600, 'sim2real': 1000}
+POSTERS = {'scene-comparison': 720, 'sim2real': 1000}
 
 
 def report(label, source, target):
@@ -143,7 +143,7 @@ def videos():
         return
     (OUT / 'videos').mkdir(exist_ok=True)
     print('videos')
-    for name, width, fps, crf in [('scene-comparison', 1600, 30, 22), ('sim2real', 1000, None, 28)]:
+    for name, width, fps, crf in [('scene-comparison', 720, 10, 22), ('sim2real', 1000, None, 28)]:
         source = ASSETS / 'studio/videos' / f'{name}.mp4'
         target = OUT / 'videos' / f'{name}.mp4'
         scale = f'scale={width}:-2:flags=lanczos' + (f',fps={fps}' if fps else '')
