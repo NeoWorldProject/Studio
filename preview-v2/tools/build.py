@@ -29,6 +29,7 @@ ASSET_FILES = [
     'studio/scenes/scene-01/scene.glb',
     'studio/scenes/scene-01/scene-record.json',
     'studio/scenes/scene-01/scene-explorer-data.js',  # explorer fallback if the GLB path fails
+    'studio/scenes/scene-01/scene-source-data.js',  # verbatim archived programs for the code viewer
     'studio/videos/sim2real.mp4',  # original HEVC, offered first to browsers that can play it
     *(f'architecture/scene-method/{name}.webp' for name in [
         'observation-wide', 'observation-detail', 'handoff-real', 'handoff-sim', 'object-real', 'object-sim',

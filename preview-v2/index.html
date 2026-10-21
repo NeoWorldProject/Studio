@@ -14,7 +14,7 @@
   <link rel="preload" href="optimized/scene-wireframe.nwf2.gz" as="fetch" crossorigin>
   <link rel="preload" href="../assets/fusion-pixel-latin-subset.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="viewer.css?v=v2-1">
-  <link rel="stylesheet" href="style.css?v=v2-8">
+  <link rel="stylesheet" href="style.css?v=v2-10">
   <link rel="stylesheet" href="workflow.css?v=1">
   <script defer src="scene-hero.js?v=v2-1"></script>
   <script defer src="lazy-media.js?v=v2-1"></script>
@@ -22,7 +22,7 @@
   <script defer src="app.js?v=v2-3"></script>
   <script defer src="workflow.js?v=1"></script>
   <script defer src="scene-video.js?v=v2-3"></script>
-  <script defer src="scene-explorer.js?v=v2-2"></script>
+  <script defer src="scene-explorer.js?v=v2-3"></script>
 </head>
 <body>
   <a class="skip-link" href="#research">Skip to article</a>
@@ -174,8 +174,10 @@
                 <div class="scene-explorer-tip" hidden></div>
                 <p class="scene-explorer-hint">click an object for X-ray + code · drag to rotate · scroll to zoom</p>
               </div>
-              <aside class="scene-explorer-code-panel" id="scene-explorer-code-panel" hidden aria-label="Construction record of the selected scene object">
-                <div class="scene-explorer-code-head"><h4 id="scene-explorer-code-title">Object construction record</h4><span>RECORDED FROM SCENE.GLB</span><button class="scene-explorer-code-close" id="scene-explorer-code-close" type="button" aria-label="Return to rendered view">×</button></div>
+              <aside class="scene-explorer-code-panel" id="scene-explorer-code-panel" hidden aria-label="Archived construction source for Scene 01">
+                <div class="scene-explorer-code-head"><h4 id="scene-explorer-code-title">Scene construction source</h4><span>ARCHIVED PYTHON SOURCE</span><button class="scene-explorer-code-close" id="scene-explorer-code-close" type="button" aria-label="Return to rendered view">×</button></div>
+                <div class="scene-explorer-source-controls"><label>Object<select id="scene-explorer-source-object" aria-label="Choose a Scene 01 object"></select></label><label>Source file<select id="scene-explorer-source-file" aria-label="Choose an archived source file"></select></label></div>
+                <p class="scene-explorer-code-provenance" id="scene-explorer-code-provenance">Archived source; the final scene includes later revisions.</p>
                 <pre id="scene-explorer-code" aria-live="polite"></pre>
               </aside>
             </div>
@@ -254,13 +256,13 @@
               </section>
 
               <section class="metric-board metric-board-lower" aria-labelledby="metric-chamfer">
-                <header><span><b id="metric-chamfer">Chamfer Distance</b><small>Reference-geometry agreement</small></span><em>lower ↓</em></header>
-                <div class="metric-lower-axis" aria-hidden="true"><span>more distance</span><strong>lower is better →</strong></div>
+                <header><span><b id="metric-chamfer">Chamfer Distance</b><small>Reference-geometry agreement</small></span><em>lower is better ↓</em></header>
+                <div class="metric-lower-axis" aria-hidden="true"><span>bar length = measured value</span><strong>shorter bar wins</strong></div>
                 <ol class="score-list">
-                  <li style="--score:100%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.0365 ↓</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
-                  <li style="--score:53.68%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.0680</span><i class="score-track"><i class="score-fill"></i></i></li>
-                  <li style="--score:50.76%;--delay:2"><span class="score-rank">03</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.0719</span><i class="score-track"><i class="score-fill"></i></i></li>
-                  <li style="--score:48.86%;--delay:3"><span class="score-rank">04</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.0747</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:48.86%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 <small>OURS</small></span><span class="score-value">0.0365</span><i class="score-track"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:91.03%;--delay:1"><span class="score-rank">02</span><span class="score-method">VIGA <small>2026</small></span><span class="score-value">0.0680</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:96.25%;--delay:2"><span class="score-rank">03</span><span class="score-method">Articraft <small>2026</small></span><span class="score-value">0.0719</span><i class="score-track"><i class="score-fill"></i></i></li>
+                  <li style="--score:100%;--delay:3"><span class="score-rank">04</span><span class="score-method">Codex+BlenderMCP <small>2025</small></span><span class="score-value">0.0747</span><i class="score-track"><i class="score-fill"></i></i></li>
                 </ol>
               </section>
 
@@ -274,7 +276,7 @@
                 </ol>
               </section>
             </div>
-            <p class="benchmark-footnote"><span>Bars are normalized to the best method; labels report original values.</span><span>Chamfer is inverse-normalized and anchored to the lower-is-better edge.</span></p>
+            <p class="benchmark-footnote"><span>Bars show the measured value relative to the largest value in each metric; labels report original values.</span><span>For Chamfer Distance, a shorter bar and lower value rank higher.</span></p>
           </figure>
 
           <figure class="benchmark-card benchmark-scene" aria-labelledby="scene-benchmark-title">
@@ -302,27 +304,27 @@
                 </ol>
               </section>
               <section class="metric-board metric-board-lower" aria-labelledby="scene-ppen">
-                <header><span><b id="scene-ppen">P-Pen</b><small>Penetration percentage (%)</small></span><em>lower ↓</em></header>
-                <div class="metric-lower-axis" aria-hidden="true"><span>inverse-normalized</span><strong>lower is better →</strong></div>
+                <header><span><b id="scene-ppen">P-Pen</b><small>Penetration percentage (%)</small></span><em>lower is better ↓</em></header>
+                <div class="metric-lower-axis" aria-hidden="true"><span>bar length = measured value</span><strong>shorter bar wins</strong></div>
                 <ol class="score-list">
-                  <li style="--score:100.00%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 (full) <small>OURS</small></span><span class="score-value">0.67%</span><i class="score-track" aria-hidden="true"><i class="score-fill score-fill-ours"></i></i></li>
-                  <li style="--score:5.77%;--delay:1"><span class="score-rank">02</span><span class="score-method">Codex</span><span class="score-value">11.61%</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
-                  <li style="--score:1.48%;--delay:2"><span class="score-rank">03</span><span class="score-method">NeoWorld-3 w/ BlenderMCP</span><span class="score-value">45.41%</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
-                  <li style="--score:1.47%;--delay:3"><span class="score-rank">04</span><span class="score-method">Direct GPT</span><span class="score-value">45.68%</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
+                  <li style="--score:1.47%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 (full) <small>OURS</small></span><span class="score-value">0.67%</span><i class="score-track" aria-hidden="true"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:25.42%;--delay:1"><span class="score-rank">02</span><span class="score-method">Codex</span><span class="score-value">11.61%</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
+                  <li style="--score:99.41%;--delay:2"><span class="score-rank">03</span><span class="score-method">NeoWorld-3 w/ BlenderMCP</span><span class="score-value">45.41%</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
+                  <li style="--score:100%;--delay:3"><span class="score-rank">04</span><span class="score-method">Direct GPT</span><span class="score-value">45.68%</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
                 </ol>
               </section>
               <section class="metric-board metric-board-lower" aria-labelledby="scene-ocd">
-                <header><span><b id="scene-ocd">Object Center Distance</b><small>Object center distance (cm)</small></span><em>lower ↓</em></header>
-                <div class="metric-lower-axis" aria-hidden="true"><span>inverse-normalized</span><strong>lower is better →</strong></div>
+                <header><span><b id="scene-ocd">Object Center Distance</b><small>Object center distance (cm)</small></span><em>lower is better ↓</em></header>
+                <div class="metric-lower-axis" aria-hidden="true"><span>bar length = measured value</span><strong>shorter bar wins</strong></div>
                 <ol class="score-list">
-                  <li style="--score:100.00%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 (full) <small>OURS</small></span><span class="score-value">25.9445 cm</span><i class="score-track" aria-hidden="true"><i class="score-fill score-fill-ours"></i></i></li>
-                  <li style="--score:54.67%;--delay:1"><span class="score-rank">02</span><span class="score-method">NeoWorld-3 w/ BlenderMCP</span><span class="score-value">47.4549 cm</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
-                  <li style="--score:54.43%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex</span><span class="score-value">47.6677 cm</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
-                  <li style="--score:24.05%;--delay:3"><span class="score-rank">04</span><span class="score-method">Direct GPT</span><span class="score-value">107.8875 cm</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
+                  <li style="--score:24.05%;--delay:0"><span class="score-rank">01</span><span class="score-method">NeoWorld-3 (full) <small>OURS</small></span><span class="score-value">25.9445 cm</span><i class="score-track" aria-hidden="true"><i class="score-fill score-fill-ours"></i></i></li>
+                  <li style="--score:43.99%;--delay:1"><span class="score-rank">02</span><span class="score-method">NeoWorld-3 w/ BlenderMCP</span><span class="score-value">47.4549 cm</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
+                  <li style="--score:44.18%;--delay:2"><span class="score-rank">03</span><span class="score-method">Codex</span><span class="score-value">47.6677 cm</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
+                  <li style="--score:100%;--delay:3"><span class="score-rank">04</span><span class="score-method">Direct GPT</span><span class="score-value">107.8875 cm</span><i class="score-track" aria-hidden="true"><i class="score-fill"></i></i></li>
                 </ol>
               </section>
             </div>
-            <p class="benchmark-footnote"><span>MLLM Overall = mean of Complete, Layout, and Function (rounded to 4 decimals).</span><span>Bars: value / best for DINOv3 and MLLM; best / value for P-Pen and OCD. Labels show original values.</span></p>
+            <p class="benchmark-footnote"><span>MLLM Overall = mean of Complete, Layout, and Function (rounded to 4 decimals).</span><span>Bars show value / largest value in each metric. For P-Pen and OCD, shorter bars rank higher. Labels show original values.</span></p>
           </figure>
         </section>
         <section class="article-section" id="outlook" aria-labelledby="outlook-heading">

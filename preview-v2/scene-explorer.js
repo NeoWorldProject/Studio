@@ -1,4 +1,4 @@
-/* Scene 01: rendered by default; click an object to reveal X-ray geometry and its recorded construction code.
+/* Scene 01: rendered by default; click an object to reveal X-ray geometry and archived construction source.
    Three.js and the model load only as the explorer approaches the viewport (lazy-media.js). */
 (() => {
   'use strict';
@@ -14,12 +14,16 @@
   const codePanel = document.querySelector('#scene-explorer-code-panel');
   const codeTitle = document.querySelector('#scene-explorer-code-title');
   const codeList = document.querySelector('#scene-explorer-code');
+  const sourceObject = document.querySelector('#scene-explorer-source-object');
+  const sourceFile = document.querySelector('#scene-explorer-source-file');
+  const sourceProvenance = document.querySelector('#scene-explorer-code-provenance');
   const codeClose = document.querySelector('#scene-explorer-code-close');
   const tip = explorer.querySelector('.scene-explorer-tip');
   const hint = explorer.querySelector('.scene-explorer-hint');
   const assetMode = document.querySelector('meta[name="asset-mode"]')?.content || 'source';
   const sceneBase = assetMode === 'source' ? '../assets/studio/scenes/scene-01/' : './assets/studio/scenes/scene-01/';
   const payloadPath = `${sceneBase}scene-explorer-data.js`;
+  const sourcePath = `${sceneBase}scene-source-data.js`;
   const colors = ['#79c8ff', '#ffbf69', '#ff8db8', '#b696ff', '#61e0bc', '#ffe773', '#ff765a', '#b8f34a', '#69d2ff', '#899381'];
 
   let T;
@@ -45,8 +49,9 @@
   let partRecords = new Map();
   let meshesByNode = new Map();
   let entityColors = new Map();
-  let codeLines = new Map();
-  let activeCodeLine = null;
+  let sourceData;
+  let sourcePromise;
+  let activeSourceId;
   let hovered = [];
 
   async function fetchAsset(name, type) {
@@ -64,6 +69,22 @@
       script.onerror = () => reject(new Error('Could not load the local Scene 01 payload.'));
       document.head.append(script);
     });
+  }
+
+  function loadSource() {
+    if (sourceData) return Promise.resolve(sourceData);
+    if (sourcePromise) return sourcePromise;
+    sourcePromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = sourcePath;
+      script.onload = () => {
+        sourceData = window.NW_SCENE01_SOURCE;
+        sourceData ? resolve(sourceData) : reject(new Error('The archived Scene 01 source was empty.'));
+      };
+      script.onerror = () => reject(new Error('Could not load the archived Scene 01 source.'));
+      document.head.append(script);
+    });
+    return sourcePromise;
   }
 
   function decodeBase64(value) {
@@ -118,53 +139,6 @@
       .replace(/\b\w/g, letter => letter.toUpperCase());
   }
 
-  function codeName(name) {
-    return name.replace(/^Entity__/, '').replace(/^s1-/, '').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '');
-  }
-
-  function concise(value, key) {
-    if (Array.isArray(value)) {
-      if (value.length && Array.isArray(value[0])) return `[${value.length} ${key || 'values'}]`;
-      if (value.length > 8) return `[${value.length} values]`;
-      return `[${value.map(item => typeof item === 'number' ? Number(item.toFixed(5)) : JSON.stringify(item)).join(', ')}]`;
-    }
-    if (typeof value === 'number') return String(Number(value.toFixed(5)));
-    if (typeof value === 'string') return JSON.stringify(value);
-    if (value && typeof value === 'object') return '{…}';
-    return String(value);
-  }
-
-  function entityLines(entity, focusNode) {
-    const identifier = codeName(entity.id || entity.node);
-    const built = entity.parts.filter(part => part.op).length;
-    const lines = [
-      { kind: 'comment', text: `# ${entity.id} · ${entity.parts.length} parts · ${built} recorded SDK operations` },
-      { kind: 'declaration', text: `${identifier} = scene.object(${JSON.stringify(entity.id)})` },
-    ];
-    const focused = entity.parts.find(part => sanitize(part.node) === focusNode);
-    const ordered = [focused, ...entity.parts.filter(part => part.op), ...entity.parts].filter(Boolean);
-    const shown = [];
-    const seen = new Set();
-    for (const part of ordered) {
-      const node = sanitize(part.node);
-      if (seen.has(node)) continue;
-      seen.add(node);
-      shown.push(part);
-      if (shown.length === 5) break;
-    }
-    shown.forEach(part => {
-      const node = sanitize(part.node);
-      if (!part.op) {
-        lines.push({ kind: 'mesh', node, text: `${identifier}.mesh(${JSON.stringify(part.part)})  # stored native mesh` });
-        return;
-      }
-      const params = Object.entries(part.params || {}).map(([key, value]) => `${key}=${concise(value, key)}`);
-      lines.push({ kind: 'operation', node, text: `${identifier}.${part.op}(${[JSON.stringify(part.part), ...params].join(', ')})` });
-    });
-    if (entity.parts.length > shown.length) lines.push({ kind: 'comment', text: `# + ${entity.parts.length - shown.length} additional recorded parts` });
-    return lines;
-  }
-
   function setHovered(list) {
     hovered.forEach(mesh => {
       if (mesh.material?.emissive) mesh.material.emissive.copy(mesh.material.userData.baseEmissive || new T.Color(0));
@@ -176,39 +150,48 @@
     dirty = true;
   }
 
-  function markCodeLine(node, shouldScroll) {
-    activeCodeLine?.classList.remove('is-active');
-    activeCodeLine = node ? codeLines.get(node) || null : null;
-    if (!activeCodeLine) return;
-    activeCodeLine.classList.add('is-active');
-    if (shouldScroll) codeList.scrollTop = Math.max(0, activeCodeLine.offsetTop - codeList.clientHeight / 2);
-  }
-
-  function renderCode(name, focusNode) {
+  function renderCode(name) {
     const entity = entityRecords.get(name);
-    codeLines = new Map();
-    activeCodeLine = null;
     codeTitle.textContent = entity ? `${pretty(name)} · ${entity.parts.length} parts` : pretty(name);
-    if (!entity) {
-      codeList.textContent = '# This object is stored as native scene geometry.\n# No object-level construction record is attached.';
+    sourceObject.value = name;
+    if (!sourceData) {
+      codeList.textContent = 'Loading archived Python source…';
+      loadSource().then(() => { if (selectedEntity === name) renderCode(name); }).catch(error => {
+        console.error('Scene 01 source:', error);
+        codeList.textContent = 'Archived source could not be loaded.';
+      });
       return;
     }
+    const choices = sourceData.entitySources[entity?.id || name] || [];
+    if (!choices.includes(activeSourceId)) activeSourceId = choices[0];
+    sourceFile.replaceChildren(...choices.map(id => new Option(sourceData.files[id].label, id)));
+    sourceFile.value = activeSourceId;
+    const source = sourceData.files[activeSourceId];
+    if (!source) {
+      sourceProvenance.textContent = 'No archived source mapped to this object.';
+      codeList.textContent = '';
+      return;
+    }
+    sourceProvenance.textContent = `${source.stage} · ${source.path}:${source.firstLine}–${source.lastLine} · final .blend is authoritative`;
+    sourceProvenance.title = `${sourceData.provenance} SHA-256: ${source.sha256}`;
     const fragment = document.createDocumentFragment();
-    entityLines(entity, focusNode).forEach(line => {
+    const lines = source.code.trimEnd().split(/\r?\n/);
+    lines.forEach((line, index) => {
       const span = document.createElement('span');
-      span.className = `scene-code-line scene-code-${line.kind}`;
-      span.textContent = line.text;
-      if (line.node) {
-        span.dataset.node = line.node;
-        codeLines.set(line.node, span);
-        span.addEventListener('pointerenter', () => setHovered(meshesByNode.get(line.node) || []));
-        span.addEventListener('pointerleave', () => setHovered([]));
-      }
+      span.className = `scene-code-line scene-code-${/^\s*#/.test(line) ? 'comment' : /^(def|class|import|from)\b/.test(line) ? 'declaration' : 'operation'}`;
+      span.dataset.lineNumber = String(source.firstLine + index);
+      span.textContent = line || ' ';
       fragment.append(span);
     });
     codeList.replaceChildren(fragment);
     codeList.scrollTop = 0;
-    markCodeLine(focusNode, false);
+    const focus = sourceData.entityFocus[entity?.id || name];
+    const focusIndex = focus ? lines.findIndex(line => line.includes(focus)) : -1;
+    if (focusIndex > 0) requestAnimationFrame(() => {
+      if (selectedEntity === name && sourceFile.value === activeSourceId) {
+        codeList.scrollTop = Math.max(0, codeList.children[focusIndex].offsetTop - codeList.offsetTop - 22);
+      }
+    });
   }
 
   function positionCodePanel() {
@@ -264,14 +247,15 @@
     dirty = true;
   }
 
-  function selectEntity(name, focusNode) {
+  function selectEntity(name) {
+    if (selectedEntity !== name) activeSourceId = null;
     selectedEntity = name;
-    renderCode(name, focusNode);
+    renderCode(name);
     paint();
     requestAnimationFrame(positionCodePanel);
   }
 
-  function setXray(next, entity, focusNode) {
+  function setXray(next, entity) {
     xray = next;
     explorer.classList.toggle('is-xray', xray);
     toggle.setAttribute('aria-pressed', String(xray));
@@ -281,10 +265,9 @@
     hint.textContent = xray
       ? 'click another object to inspect · click empty space to return · drag to rotate'
       : 'click an object for X-ray + code · drag to rotate · scroll to zoom';
-    if (xray) selectEntity(entity || selectedEntity || entityNames.find(name => /microwave/i.test(name)) || entityNames[0], focusNode);
+    if (xray) selectEntity(entity || selectedEntity || entityNames.find(name => /microwave/i.test(name)) || entityNames[0]);
     else {
       setHovered([]);
-      markCodeLine(null, false);
       paint();
     }
   }
@@ -303,7 +286,7 @@
     }
     const nodeRecord = mesh.userData.node && partRecords.get(mesh.userData.node);
     const part = nodeRecord?.part || mesh.name.split('__').pop().replace(/_/g, ' ');
-    tip.innerHTML = `<span>${pretty(mesh.userData.entity)}</span><b>${part}</b>${nodeRecord?.op ? `<code>${nodeRecord.op}(…)</code>` : '<code>native mesh</code>'}`;
+    tip.innerHTML = `<span>${pretty(mesh.userData.entity)}</span><b>${part}</b><code>click for archived source</code>`;
     const rect = stage.getBoundingClientRect();
     tip.style.left = `${Math.min(event.clientX - rect.left + 15, rect.width - 220)}px`;
     tip.style.top = `${Math.min(event.clientY - rect.top + 15, rect.height - 92)}px`;
@@ -396,6 +379,8 @@
     const objectCount = entityNames.filter(name => name !== 'Background').length;
     count.textContent = `${meshes.length} named parts in ${objectCount} objects plus the room shell`;
     selectedEntity = entityNames.find(name => /microwave/i.test(name)) || entityNames[0];
+    sourceObject.replaceChildren(...entityNames.map(name => new Option(name === 'Background' ? 'Room shell & floor' : pretty(name), name)));
+    sourceObject.value = selectedEntity;
     frameModel();
     paint();
   }
@@ -451,8 +436,7 @@
         }
         if (!xray) setXray(true, mesh.userData.entity, mesh.userData.node);
         else {
-          selectEntity(mesh.userData.entity, mesh.userData.node);
-          markCodeLine(mesh.userData.node, true);
+          selectEntity(mesh.userData.entity);
         }
       });
 
@@ -467,7 +451,6 @@
           if (xray && mesh) {
             const related = mesh.userData.node ? meshesByNode.get(mesh.userData.node) || [mesh] : [mesh];
             setHovered(related);
-            if (mesh.userData.entity === selectedEntity) markCodeLine(mesh.userData.node, false);
           } else setHovered([]);
         }
         if (dirty) {
@@ -489,6 +472,11 @@
   // The model may still be loading; there is nothing to inspect until it has parts.
   toggle.addEventListener('click', () => { if (meshes.length) setXray(!xray); });
   codeClose.addEventListener('click', () => setXray(false));
+  sourceObject.addEventListener('change', () => selectEntity(sourceObject.value));
+  sourceFile.addEventListener('change', () => {
+    activeSourceId = sourceFile.value;
+    renderCode(selectedEntity);
+  });
   const observer = new IntersectionObserver(entries => {
     inView = entries[entries.length - 1].isIntersecting;
     if (inView) initialize();
