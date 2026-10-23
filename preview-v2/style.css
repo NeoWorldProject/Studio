@@ -77,11 +77,14 @@ h1{max-width:820px;margin:0 0 20px;font:600 clamp(40px,4.6vw,70px)/1.04 var(--di
 .beta-access-dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 10px var(--accent)}
 .beta-access-link>span:last-child{margin-left:6px;font-size:16px;font-weight:400}
 
-/* Cover resources: GitHub is the only live destination, so it leads; the rest recede. */
+/* Cover resources: the paper is live; unreleased destinations recede. */
 .project-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:820px}
 .project-links .resource-card{display:flex;align-items:center;gap:12px;min-width:0;min-height:68px;padding:13px 15px;border:1px solid var(--line-strong);border-radius:var(--radius-sm);background:color-mix(in srgb,var(--surface) 80%,transparent);color:var(--text)}
 .project-links .resource-card-github{border-color:var(--accent);background:var(--accent);color:var(--accent-ink);transition:transform .25s var(--ease-out),box-shadow .25s,filter .25s}
 .project-links .resource-card-github:hover{color:var(--accent-ink);transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 12px 34px -12px rgba(184,243,74,.55)}
+.project-links .resource-card-paper{border-color:var(--accent-line);background:var(--accent-soft);transition:transform .25s var(--ease-out),border-color .25s,background-color .25s}
+.project-links .resource-card-paper:hover{transform:translateY(-2px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,var(--surface))}
+.project-links .resource-card-paper .resource-icon{color:var(--accent)}
 .project-links .resource-card-soon{cursor:default;border-style:dashed;background:transparent;color:var(--text-2)}
 .project-links .resource-icon{display:block;flex:0 0 22px;width:22px;height:22px}
 .project-links .resource-icon-emoji{font-size:20px;line-height:22px;text-align:center;filter:grayscale(.35)}
@@ -91,6 +94,7 @@ h1{max-width:820px;margin:0 0 20px;font:600 clamp(40px,4.6vw,70px)/1.04 var(--di
 .project-links .resource-card-github small{color:#3d5418}
 .project-links .resource-arrow{margin-left:auto;font-size:16px;transition:transform .25s var(--ease-out)}
 .project-links .resource-card-github:hover .resource-arrow{transform:translate(2px,-2px)}
+.project-links .resource-card-paper:hover .resource-arrow{transform:translate(2px,-2px)}
 
 /* Intro and scroll motion: CSS only; the page is fully readable without it. */
 @media(prefers-reduced-motion:no-preference){
