@@ -1,6 +1,6 @@
-// Update these two destinations when the public domains replace the temporary IP addresses.
+// External destinations used by the research blog.
 const NEOWORLD_EXTERNAL_LINKS = Object.freeze({
-  studio: 'https://47.116.163.26:28871/login',
+  studio: 'https://doxibot.com/',
   beta: 'http://139.224.165.34/',
 });
 
