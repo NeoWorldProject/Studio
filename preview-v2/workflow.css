@@ -110,7 +110,8 @@
 .nw-simulation{left:850px;width:290px;padding:14px}
 .nw-simulation h4{margin-top:5px;font-size:18px}
 .nw-simulation-image{height:108px;margin-top:10px;overflow:hidden;border-radius:7px}
-.nw-simulation-image img{object-position:50% 50%}
+/* Show the simulation panel in the top right of the demonstration poster. */
+.nw-simulation-image img{width:166.667%;height:auto;max-width:none;transform:translate(-40%,-12px)}
 .nw-edge-label{position:absolute;z-index:4;color:#819373;font:8px var(--mono);text-align:center;width:130px}
 .nw-candidate-label{left:720px;top:923px}.nw-sim-feedback-label{left:720px;top:987px}.nw-deploy-label{left:370px;top:944px}
 .nw-connections{position:absolute;inset:0;z-index:3;width:100%;height:100%;overflow:visible;pointer-events:none}
